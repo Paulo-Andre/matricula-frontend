@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Matrícula do Aluno</title>
+    <style>
+        /* Estilos da tabela (mantenha os mesmos estilos que você já tem) */
+    </style>
+</head>
+<body>
+    <h1>FICHA DE MATRÍCULA DO ALUNO</h1>
+    <h2>PREFEITURA DE MONTES CLAROS-MG</h2>
+    <h3>SECRETARIA MUNICIPAL DE EDUCAÇÃO</h3>
+    <h4>ESCOLA MUNICIPAL EGÍDIO CORDEIRO AQUINO</h4>
+    <h5>ENSINO FUNDAMENTAL - ANOS INICIAIS 1º AO 5º</h5>
+
+    <table>
+        <colgroup>
+            <col style="width: 9%">
+            <col style="width: 24%">
+            <col style="width: 3%">
+            <col style="width: 0%">
+            <col style="width: 20%">
+            <col style="width: 15%">
+            <col style="width: 3%">
+            <col style="width: 8%">
+            <col style="width: 0%">
+            <col style="width: 13%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <td colspan="7"><strong>NOME DO ALUNO:</strong> <span id="nomeAlunoTabela"></span></td>
+                <td colspan="3" style="text-align: center;"><strong>DATA DE NASCIMENTO:</strong> <span id="dataNascimentoTabela"></span></td>
+            </tr>
+            <!-- Repita para os outros campos da tabela -->
+        </tbody>
+    </table>
+
+    <script>
+        // Preenche os campos da tabela com os dados do localStorage
+        document.getElementById('nomeAlunoTabela').textContent = localStorage.getItem('nomeAluno');
+        document.getElementById('dataNascimentoTabela').textContent = localStorage.getItem('dataNascimento');
+        // Repita para os outros campos da tabela
+    </script>
+</body>
+</html>

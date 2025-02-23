@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Matrícula do Aluno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 800px;
+            margin: auto;
+        }
+        fieldset {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        legend {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .inline {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .inline label {
+            display: inline;
+        }
+        .inline input {
+            width: auto;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulário de Matrícula do Aluno</h1>
+    <form id="formularioMatricula" onsubmit="enviarDados(event)">
+        <!-- Campos do formulário (mantenha os mesmos campos que você já tem) -->
+        <div class="section">
+            <button type="submit">Enviar Formulário</button>
+        </div>
+    </form>
+
+    <script>
+        async function enviarDados(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Captura os dados do formulário
+            const dados = {
+                nomeAluno: document.getElementById('nomeAluno').value,
+                dataNascimento: document.getElementById('dataNascimento').value,
+                sexo: document.querySelector('input[name="sexo"]:checked').value,
+                nacionalidade: document.getElementById('nacionalidade').value,
+                naturalidade: document.getElementById('naturalidade').value,
+                uf: document.getElementById('uf').value,
+                raca: document.querySelector('input[name="raca"]:checked').value,
+                cartaoSUS: document.getElementById('cartaoSUS').value,
+                cpfAluno: document.getElementById('cpfAluno').value,
+                laudo: document.getElementById('laudo').value,
+                alergia: document.querySelector('input[name="alergia"]:checked').value,
+                qualAlergia: document.getElementById('qualAlergia').value,
+                rgAluno: document.getElementById('rgAluno').value,
+                orgaoEmissor: document.getElementById('orgaoEmissor').value,
+                dataExpedicao: document.getElementById('dataExpedicao').value,
+                beneficios: document.getElementById('beneficios').value,
+                nis: document.getElementById('nis').value,
+                irmaoEscola: document.querySelector('input[name="irmaoEscola"]:checked').value
+            };
+
+            // Envia os dados para o backend
+            try {
+                const response = await fetch('https://meu-backend.vercel.app/enviar-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ dados })
+                });
+
+                if (response.ok) {
+                    // Armazena os dados no localStorage e redireciona para a primeira página
+                    localStorage.setItem('nomeAluno', dados.nomeAluno);
+                    localStorage.setItem('dataNascimento', dados.dataNascimento);
+                    localStorage.setItem('sexo', dados.sexo);
+                    localStorage.setItem('nacionalidade', dados.nacionalidade);
+                    localStorage.setItem('naturalidade', dados.naturalidade);
+                    localStorage.setItem('uf', dados.uf);
+                    localStorage.setItem('raca', dados.raca);
+                    localStorage.setItem('cartaoSUS', dados.cartaoSUS);
+                    localStorage.setItem('cpfAluno', dados.cpfAluno);
+                    localStorage.setItem('laudo', dados.laudo);
+                    localStorage.setItem('alergia', dados.alergia);
+                    localStorage.setItem('qualAlergia', dados.qualAlergia);
+                    localStorage.setItem('rgAluno', dados.rgAluno);
+                    localStorage.setItem('orgaoEmissor', dados.orgaoEmissor);
+                    localStorage.setItem('dataExpedicao', dados.dataExpedicao);
+                    localStorage.setItem('beneficios', dados.beneficios);
+                    localStorage.setItem('nis', dados.nis);
+                    localStorage.setItem('irmaoEscola', dados.irmaoEscola);
+
+                    window.location.href = 'primeira-pagina.html';
+                } else {
+                    alert('Erro ao enviar e-mail');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao enviar dados');
+            }
+        }
+    </script>
+</body>
+</html>
